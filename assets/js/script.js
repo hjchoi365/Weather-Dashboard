@@ -53,3 +53,98 @@ function getUVI(lat, lon, date) {
             weatherrowEl.textContent = "Error: " + cityname + " city " + response.statusText
         });
 };
+
+
+var getfivedayWeatherDetails = function(cityname){
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid=eb88f60513f97685d54ad8308a28db93&units=imperial";
+    var datevar = 0;
+    var tempvar = 0;
+    var humidityvar = 0;
+    var iconvar = "";
+    var iconurl="";
+  
+    fetch(apiUrl).then(function(response)
+    {
+        if (response.ok) 
+      {
+          response.json().then(function(data) 
+        {
+          for(var i=0;i<data.list.length;i++)
+          {
+            var dateString = data.list[i].dt_txt;
+            if (dateString.indexOf("15:00:00") !== -1)
+           {
+                datevar = dateString.substring(0,10);
+                datevar = moment(datevar,"YYYY-MM-DD");
+                datevar = datevar.format('MM/DD/YYYY');
+                tempvar = data.list[i].main.temp;
+                humidityvar = data.list[i].main.humidity;
+                iconvar = data.list[i].weather[0].icon;
+                iconurl = "https:///openweathermap.org/img/w/" + iconvar + ".png";
+      
+                var cardEl = document.createElement("div");
+                cardEl.classList = "card col-md-2 d-flex flex-column forecast-card";
+                forecastEl.appendChild(cardEl);
+      
+                var cardbodyEl = document.createElement("div");
+                cardbodyEl.classList="card-body";
+                cardEl.appendChild(cardbodyEl);
+      
+                var cardtitleEl = document.createElement("h3");
+                cardtitleEl.classList = "card-title forecast-title";
+                cardtitleEl.innerHTML = datevar;
+                cardbodyEl.appendChild(cardtitleEl);
+      
+                var imgvar = document.createElement("img");
+                imgvar.classList = "card-text";
+                imgvar.setAttribute("src",iconurl);
+                cardbodyEl.appendChild(imgvar);
+      
+                var tempbodyEl = document.createElement("div");
+                tempbodyEl.classList="card-text forecast-text";
+                tempbodyEl.innerHTML = "Temp: "+tempvar+"&#8457";
+                cardbodyEl.appendChild(tempbodyEl);
+      
+                var humiditybodyEl = document.createElement("div");
+                humiditybodyEl.classList="card-text forecast-text";
+                humiditybodyEl.innerHTML = "Humidity: "+humidityvar+"%";
+                cardbodyEl.appendChild(humiditybodyEl);
+            }
+          }
+        });
+      } 
+      else
+        { 
+          forecastEl.textContent = "Error: " + response.statusText;        
+        }
+      })
+      .catch(function(error) {
+        forecastEl.textContent = "Unable to connect"; 
+    });
+  };
+
+  function addTorepository(cityName)
+{
+  var flag = false;  
+  //add entry to local repository
+    for(var i=0;i<cities.length;i++)
+    {
+        if(cityName.toLowerCase() === cities[i].toLowerCase())
+        {
+            flag=true;
+            break;
+        }
+    }
+    if(flag===false)
+    {
+    // create a span element to hold city name
+    var titleEl = document.createElement("li");
+    titleEl.className = "cities-name";
+    titleEl.textContent = cityName;
+    citiesEl.appendChild(titleEl);
+    titleEl.onclick = dynamicEvent;
+    cities.push(cityName);
+    localStorage.setItem("cities",JSON.stringify(cities));
+    }
+};
+
