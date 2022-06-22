@@ -1,0 +1,131 @@
+:root {
+    --primary: #ccdad1;
+    --dark: #38302e;
+    --border-radius: .3rem;
+  }
+  
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header 
+{
+    padding: 15px 30px;
+    background-color: #0a2527;
+    display:flex;
+    justify-content: center;   
+}
+
+body {
+    background-color: gray;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: var(--primary);
+    padding: 0 10px;      
+}
+
+.user-form{
+  padding: 10px 10px;
+  margin: 10px 0px 10px 30px;
+  
+}
+
+.title2 {
+  font-size: 1.8rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+#search{
+  padding: 10px;  
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 55%;
+  background: #f1f1f1;
+}
+
+#searchbtn{
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; 
+  cursor: pointer;
+}
+
+.cities-list{
+  list-style-type:none;
+}
+
+.weather-card{
+  padding: 1px 5px;
+  margin: 30px 8px 30px 15px;
+
+}
+
+.forecast-card{
+  margin: 20px 8px 10px 15px;
+  padding: 1px 1px;
+  background-color: #2196F3;
+  color: white;
+}
+
+.cities-name{
+  margin: 0px 0px 0px 40px;
+  padding: 5px 5px 5px 5px;
+  border: 0.5px solid rgb(228, 220, 220);
+  width: 250px;
+  height:40px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.card-text{
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.greenuvIndex{
+    background-color:green;
+    color: black;
+}
+
+.yellowuvIndex{
+    background-color:yellow;
+    color: black; 
+}
+
+.orangeuvIndex{
+    background-color:orange;
+    color: black;  
+}
+
+.reduvIndex{
+  background-color: red;
+  color: white;
+}
+
+.violetuvIndex{
+    background-color:violet;
+    color: black;   
+}
+
+.weather5{
+  font-size: 30px;
+}
+
+.forecast-title{
+  font-size: 22px;
+}
+
+.forecast-text{
+  font-size: 15px;
+}
